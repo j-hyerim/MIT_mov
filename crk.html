@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>클락</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles for body and gradient background */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Light gray background */
+        }
+        .gradient-bg {
+            /* Dark blue to lighter blue gradient, matching the image */
+            background: linear-gradient(to bottom, #1a2a4b, #2c528b);
+        }
+        /* Style for the Google Maps iframe */
+        .map-iframe {
+            width: 100%;
+            height: 300px; /* Fixed height for the map, adjust as needed */
+            border: 0;
+            border-radius: 0.5rem; /* rounded-lg equivalent for iframe */
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="min-h-screen flex flex-col items-center">
+        <header class="w-full relative gradient-bg text-white pb-16 pt-4 rounded-b-xl shadow-lg">
+            <div class="container mx-auto px-4 mt-4"> 
+                <div class="flex justify-between items-center mb-6">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-xl font-semibold">클락(CRK)</span>
+                        
+                    </div>
+                    <!-- <div class="text-sm text-gray-300">(GMP-FY)</div> -->
+                </div>
+
+                <div class="bg-white text-gray-800 rounded-lg p-4 shadow-md mx-2 md:mx-auto max-w-xl -mb-24 relative z-10"> 
+                    <div class="flex flex-col md:flex-row justify-between items-center mb-4 space-y-3 md:space-y-0 md:space-x-3">
+                        <div class="flex-1 w-full">
+                            <label for="departure" class="block text-xs text-gray-500 mb-1">출발지</label>
+                            <div class="flex items-center bg-gray-50 rounded-md p-2">
+                                <svg class="w-4 h-4 text-gray-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0L6.343 16.657a4.001 4.001 0 115.657-5.657l1.414 1.414 1.414-1.414a4.001 4.001 0 015.657 5.657z"></path></svg>
+                                <input type="text" id="destination" value="청주" class="flex-1 bg-transparent outline-none text-sm font-medium">
+                            </div>
+                        </div>
+                        <div class="flex-1 w-full">
+                            <label for="destination" class="block text-xs text-gray-500 mb-1">도착지</label>
+                            <div class="flex items-center bg-gray-50 rounded-md p-2">
+                                <svg class="w-4 h-4 text-gray-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0L6.343 16.657a4.001 4.001 0 115.657-5.657l1.414 1.414 1.414-1.414a4.001 4.001 0 015.657 5.657z"></path></svg>
+                                <input type="text" id="destination" value="클락" class="flex-1 bg-transparent outline-none text-sm font-medium">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center mb-4 space-x-3">
+                        <div class="flex-1">
+                            <label for="flight-time" class="block text-xs text-gray-500 mb-1">비행 시간</label>
+                            <div class="bg-gray-50 rounded-md p-2 text-sm font-medium">3시간 38분 소요</div>
+                        </div>
+                        <div class="flex-1">
+                            <label for="date" class="block text-xs text-gray-500 mb-1">날짜</label>
+                            <div id="current-date" class="bg-gray-50 rounded-md p-2 text-sm font-medium"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between mt-4">
+                        <div class="text-sm flex-1 mr-4">
+                            <p id="weather-date"><span class="font-semibold">클락</span><br>날씨: <span class="font-semibold">맑음</span></p>
+                        </div>
+                        <!-- Placeholder QR Code image -->
+                        <!-- <img src="https://placehold.co/80x80/A0AEC0/FFFFFF?text=QR" alt="QR Code" class="w-20 h-20 rounded-md shadow-sm"> -->
+                    </div>
+
+                    <hr class="my-4 border-gray-200">
+
+                    <div class="text-xs text-gray-600 space-y-2">
+                        <p class="flex items-center"><span class="font-semibold text-blue-600 mr-2">TIP!</span> 마사지·스파 저렴, 리조트 예약 시 가격 흥정 가능</p>
+                        <p class="flex items-center"><span class="font-semibold text-blue-600 mr-2">혜택!</span> 피티에 비자면제(30일), 한인 커뮤니티·숙소 할인</p>
+                        <p class="flex items-center"><span class="font-semibold text-blue-600 mr-2">확인!</span> 밤 외출 주의. 강한 햇빛, 자외선 차단 필수.</p>
+                        <ul class="list-disc pl-5 mt-2">
+                            <li><span class="font-medium">전압
+                                220V A/B형 불안전, 돼지코 필요</span></li>
+                            <li><span class="font-medium">소비세
+                                12% + 서비스세</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Section -->
+        <!-- Adjusted top margin for mobile to account for the overlapping header card -->
+        <main class="container mx-auto px-4 mt-32 md:mt-16 w-full max-w-xl"> <!-- Adjusted mt-32 for more overlap -->
+            <!-- Explore Osaka Section -->
+            <section class="mb-8">
+                <h2 class="text-lg font-semibold text-gray-800 mb-4">클락 꼭 둘러보세요</h2>
+                <!-- Responsive grid for items, 2 columns on mobile, 3 on small screens and up -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                    <!-- Item 1: Universal Studios -->
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden transform transition-transform duration-200 hover:scale-105">
+                        <img src="./img/cr1.jpg" alt="애니아미안 폭포" class="w-full h-24 object-cover">
+                        <p class="p-2 text-sm text-gray-700">애니아미안 폭포</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden transform transition-transform duration-200 hover:scale-105">
+                        <img src="./img/cr3.jpg" alt="아가파야 동굴" class="w-full h-24 object-cover">
+                        <p class="p-2 text-sm text-gray-700">아가파야 동굴</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden transform transition-transform duration-200 hover:scale-105">
+                        <img src="./img/cr2.jpg" alt="아릴라 온천" class="w-full h-24 object-cover">
+                        <p class="p-2 text-sm text-gray-700">아릴라 온천</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden transform transition-transform duration-200 hover:scale-105">
+                        <img src="./img/cr4.jpg" alt="에클란터 반딧불 투어" class="w-full h-24 object-cover">
+                        <p class="p-2 text-sm text-gray-700">에클란터 반딧불 투어</p>
+                    </div>
+                    <!-- <div class="bg-white rounded-lg shadow-sm overflow-hidden transform transition-transform duration-200 hover:scale-105">
+                        <img src="" alt="" class="w-full h-24 object-cover">
+                        <p class="p-2 text-sm text-gray-700"></p> -->
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-8">
+                <h2 class="text-lg font-semibold text-gray-800 mb-4"> &nbsp;&nbsp;&nbsp; 지도를 통해 찾아보세요</h2>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d104994.83738755898!2d135.40363591668086!3d34.67771155075532!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000e6553406e2e1%3A0xc55bc16ee46a2fe7!2z7J2867O4IOyYpOyCrOy5tOu2gCDsmKTsgqzsubTsi5w!5e0!3m2!1sko!2skr!4v1749880608905!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </section>
+
+            <section class="mb-8">
+                <h2 class="text-lg font-semibold text-gray-800 mb-4"> &nbsp;&nbsp;&nbsp; 클락 근교 도시</h2>
+                <div class="space-y-4">
+                    <div class="flex items-center bg-white rounded-lg shadow-sm p-3 transform transition-transform duration-200 hover:scale-105">
+                        <img src="./img/cr_2.jpg" alt="마닐라" class="w-20 h-15 rounded-md object-cover mr-4">
+                        <div>
+                            <p class="font-medium text-gray-800">마닐라</p>
+                            <p class="text-sm text-gray-600">수도 관광, 쇼핑, 마카티 번화가</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center bg-white rounded-lg shadow-sm p-3 transform transition-transform duration-200 hover:scale-105">
+                        <img src="./img/cr_3.jpg" alt="수빅베이" class="w-20 h-15 rounded-md object-cover mr-4">
+                        <div>
+                            <p class="font-medium text-gray-800">수빅베이</p>
+                            <p class="text-sm text-gray-600">바다 액티비티, 돌핀쇼 체험</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center bg-white rounded-lg shadow-sm p-3 transform transition-transform duration-200 hover:scale-105">
+                        <img src="./img/cr_1.jpg" alt="앙헬레스 시티" class="w-20 h-15 rounded-md object-cover mr-4">
+                        <div>
+                            <p class="font-medium text-gray-800">앙헬레스 시티</p>
+                            <p class="text-sm text-gray-600">한인타운 중심, 클럽/카페 문화</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer placeholder -->
+        <footer class="w-full py-6 text-center text-gray-500 text-sm mt-8">
+            <p>&copy; 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        // JavaScript to update the date dynamically
+        window.onload = function() {
+            const today = new Date();
+            const month = today.getMonth() + 1; // Month is 0-indexed
+            const date = today.getDate();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(today.getDate() + 1);
+            const tomorrowMonth = tomorrow.getMonth() + 1;
+            const tomorrowDate = tomorrow.getDate();
+
+            // Update the date in the main info card
+            const currentDateElement = document.getElementById('current-date');
+            if (currentDateElement) {
+                currentDateElement.textContent = `${month}월 ${date}일-${tomorrowMonth}월 ${tomorrowDate}일`;
+            }
+
+            // Update the date in the weather info
+            const weatherDateElement = document.getElementById('weather-date');
+            if (weatherDateElement) {
+                // Weather information cannot be fetched live without an API
+                weatherDateElement.innerHTML = `${month}월 ${date}일 <span class="font-semibold">클락</span><br>날씨: <span class="font-semibold">맑음</span>`;
+            }
+        };
+    </script>
+
+</body>
+</html>
